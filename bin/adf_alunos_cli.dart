@@ -1,4 +1,4 @@
-import 'package:args/args.dart';
+import 'package:adf_alunos_cli/src/commands/students/students_command.dart';
 import 'package:args/command_runner.dart';
 
 void main(List<String> arguments) {
@@ -13,21 +13,6 @@ void main(List<String> arguments) {
   // print('${argResult['template']}');
 
   CommandRunner('ADF CLI', 'ADF CLI')
-    ..addCommand(ExemploCommand())
+    ..addCommand(StudentsCommand())
     ..run(arguments);
-}
-
-class ExemploCommand extends Command {
-  @override
-  // TODO: implement description
-  String get description => 'Éxemplo de comando';
-
-  @override
-  // TODO: implement name
-  String get name => 'exemplo';
-
-  @override
-  void run() {
-    print('executar qualquer coisa');
-  }
 }

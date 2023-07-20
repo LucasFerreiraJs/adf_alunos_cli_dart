@@ -9,7 +9,7 @@ abstract class IStudentRepository {
   Future<Student> findById(int id);
   Future<void> insert(Student student);
   Future<void> update(Student student);
-  Future<void> deleteById(Student student);
+  Future<void> deleteById(int id);
 }
 
 class StudentRepository extends IStudentRepository {
@@ -39,8 +39,6 @@ class StudentRepository extends IStudentRepository {
     if (studentResult.body == '{}') {
       throw Exception('Estudante não encontrado');
     }
-
-    // final studentData = jsonDecode(studentResult.body);
 
     return Student.fromJson(studentResult.body);
   }
@@ -76,8 +74,11 @@ class StudentRepository extends IStudentRepository {
   }
 
   @override
-  Future<void> deleteById(Student student) {
-    // TODO: implement deleteById
-    throw UnimplementedError();
+  Future<void> deleteById(int id) async {
+    final response = await http.delete(Uri.parse('http://localhost:8080/$id'));
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
   }
 }
