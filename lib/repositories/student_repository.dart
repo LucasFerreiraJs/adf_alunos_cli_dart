@@ -46,15 +46,33 @@ class StudentRepository extends IStudentRepository {
   }
 
   @override
-  Future<void> insert(Student student) {
-    // TODO: implement insert
-    throw UnimplementedError();
+  Future<void> insert(Student student) async {
+    final response = await http.post(
+      Uri.parse('http:localhost:8080/students'),
+      body: student.toJson(),
+      headers: {
+        'content-type': 'application/json',
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
   }
 
   @override
-  Future<void> update(Student student) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update(Student student) async {
+    final response = await http.put(
+      Uri.parse('http:localhost:8080/students/${student.id}'),
+      body: student.toJson(),
+      headers: {
+        'content-type': 'application/json',
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw new Exception();
+    }
   }
 
   @override
