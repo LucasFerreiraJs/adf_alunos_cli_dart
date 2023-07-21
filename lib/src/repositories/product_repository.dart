@@ -9,7 +9,9 @@ abstract class IProductRepository {
 }
 
 class ProductRepository extends IProductRepository {
+  @override
   Future<Course> findByName(String name) async {
+    print('name recebido $name');
     final response = await http.get(Uri.parse('http://localhost:8080/products?name=$name'));
 
     if (response.statusCode != 200) {
@@ -17,6 +19,8 @@ class ProductRepository extends IProductRepository {
     }
 
     final responseData = jsonDecode(response.body);
+    // responseData['isStudent'] = false;
+    print('response ${responseData}');
     if (responseData.isEmpty) {
       throw Exception('Product não encontrado');
     }

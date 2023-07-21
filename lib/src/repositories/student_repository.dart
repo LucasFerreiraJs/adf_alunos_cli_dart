@@ -46,7 +46,7 @@ class StudentRepository extends IStudentRepository {
   @override
   Future<void> insert(Student student) async {
     final response = await http.post(
-      Uri.parse('http:localhost:8080/students'),
+      Uri.parse('http://localhost:8080/students'),
       body: student.toJson(),
       headers: {
         'content-type': 'application/json',
@@ -61,7 +61,7 @@ class StudentRepository extends IStudentRepository {
   @override
   Future<void> update(Student student) async {
     final response = await http.put(
-      Uri.parse('http:localhost:8080/students/${student.id}'),
+      Uri.parse('http://localhost:8080/students/${student.id}'),
       body: student.toJson(),
       headers: {
         'content-type': 'application/json',
